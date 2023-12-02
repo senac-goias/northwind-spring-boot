@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -43,6 +45,17 @@ public class Product {
     @ManyToOne(fetch = FetchType.LAZY)
     private Supplier supplier;
 
+    //Forma 01
+    //@ManyToMany
+    //Set<Order> orders = new HashSet<>();
+
+    //FORMA 02
+    /*@ManyToMany(mappedBy = "products")
+    Set<Order> orders = new HashSet<>();*/
+
+    //FORMA 03
+    @OneToMany(mappedBy = "product")
+    Set<OrderDetail> discounts = new HashSet<>();
 
 }
 
