@@ -3,7 +3,9 @@ package br.senac.go.northwind.model;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -31,4 +33,13 @@ public class Employee {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Employee employee;
+
+    //FORMA 02
+    @ManyToMany
+    @JoinTable(
+            name = "employee_territories",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "territory_id")
+    )
+    Set<Territory> territories = new HashSet<>();
 }
